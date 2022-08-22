@@ -50,6 +50,13 @@ const Pupil = sequelize.define('pupil', {
     type: Sequelize.STRING,
     allowNull: false,
   },
+  birthday: {
+    type: Sequelize.DATE,
+    allowNull: false,
+  },
+  gender: {
+    type: Sequelize.STRING,
+  },
   father: {
     type: Sequelize.STRING,
     allowNull: false,

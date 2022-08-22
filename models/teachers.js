@@ -16,8 +16,12 @@ const Teacher = sequelize.define('teacher', {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  subjects: {
+  gender: {
     type: Sequelize.STRING,
+    allowNull: false,
+  },
+  birthday: {
+    type: Sequelize.DATE,
     allowNull: false,
   },
 });

@@ -12,9 +12,5 @@ const Subject = sequelize.define('subject', {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  teachers: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
 });
 module.exports = Subject;
