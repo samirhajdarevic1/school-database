@@ -1,0 +1,67 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <head>
+        <title>Fetch using MySQL and Node.js</title>
+      </head>
+      <body>
+          <div class="table-data">
+      <h2>Display Data using Node.js & MySQL</h2>
+      <form class="subject-form" action="/subjects" method="POST">
+        <div>
+            <ul>
+                <li>
+                    <input type="text" placeholder="subject" name="name" value="<%= subjects.name %>">
+                </li>
+                <li>
+                    <input type="text" placeholder="teachers" name="teachers" value="<%= subjects.teachers %>">
+                </li>
+              
+            </ul>
+           
+           
+        </div>
+     <!--    <input type="hidden" value="<%= subjects.id %>" name="subjectId"> -->
+        <button>Add </button>
+      </form>
+          <table border="1">
+              <tr>
+                  <th>S.N</th>
+                  <th>Subject</th>
+                  <th>Teachers</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                  <th>Details</th>
+              </tr>
+              
+              <%
+              if(subjects.length!=0){
+              var i=1;
+              subjects.forEach((subject)=>{
+              %>
+              <tr>
+                  <td><%=i; %></td>
+                  <td><%=subject.name %></td>
+                  <td><%=subject.teachers %></td>
+                  <td><a href="/users/edit/<%=subject.id%>">Edit</a></td>
+                  <td> 
+                    <form action="/subject-delete" method="POST">
+                        <input type="hidden" value="<%= subject.id %>" name="subjectId">
+                        <button class="btn" type="submit">Delete</button>
+                    </form></td>
+                  <td><a href="/subjects/<%= subject.id %>" class="btn">Details</a></td>
+              </tr>
+              <%  i++; }) %>
+              <% } else{ %>
+                  <tr>
+                      <td colspan="7">No Data Found</td>
+                  </tr>
+              <% } %>
+          </table>
+          </div>
+      </body>
+      </html>
+<%- include('../includes/end.ejs') %>

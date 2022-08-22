@@ -1,0 +1,98 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <head>
+        <title>Fetch using MySQL and Node.js</title>
+      </head>
+      <body>
+          <div class="table-data">
+      <h2>Display Data using Node.js & MySQL</h2>
+      <form class="pupil-form" action="/pupils" method="POST">
+        <div>
+            <ul>
+                <li>
+                    <input type="text" placeholder="name" name="name" value="<%= pupils.name %>">
+                </li>
+                <li>
+                    <input type="text" placeholder="last name" name="lastName" value="<%= pupils.lastName %>">
+                </li>
+                <li>
+                    <input type="text" placeholder="fathers name" name="father" value="<%= pupils.father %>">
+                </li>
+                <li> 
+                    <input type="text" placeholder="mothers name" name="mother" value="<%= pupils.mother %>">
+                </li>
+            </ul>
+           
+           
+        </div>
+     <!--    <input type="hidden" value="<%= pupils.id %>" name="pupilId"> -->
+        <button>Add Pupil</button>
+      </form>
+          <table border="1">
+              <tr>
+                  <th>S.N</th>
+                  <th>Name</th>
+                  <th>Last Name</th>
+                  <th>Fathers Name</th>
+                  <th>Mothers Name</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                  <th>Details</th>
+              </tr>
+              
+              <%
+              if(pupils.length!=0){
+              var i=1;
+              pupils.forEach((pupil)=>{
+              %>
+              <tr>
+                  <td><%=i; %></td>
+                  <td><%=pupil.name %></td>
+                  <td><%=pupil.lastName %></td>
+                  <td><%=pupil.father %></td>
+                  <td><%=pupil.mother %></td>
+                  <td><a href="/users/edit/<%=pupil.id%>">Edit</a></td>
+                  <td>
+                    <form action="/pupil-delete" method="POST">
+                        <input type="hidden" value="<%= pupil.id %>" name="pupilId">
+                        <button class="btn" type="submit">Delete</button>
+                    </form>
+                  </td>
+                  <td><a href="/pupils/<%= pupil.id %>" class="btn">Details</a></td>
+              </tr>
+              <%  i++; }) %>
+              <% } else{ %>
+                  <tr>
+                      <td colspan="7">No Data Found</td>
+                  </tr>
+              <% } %>
+          </table>
+          </div>
+      </body>
+      </html>
+
+<!--     <main>
+        <% if (pupils.length > 0) { %>
+            <div class="grid">
+                <% for (let pupil of pupils) { %>
+                    <table>aaa</table>
+                    <article class="card product-item">
+                        <header class="card__header">
+                            <h1 class="product__title"><%= pupil.name %></h1>
+                        </header>
+                        <div class="card__content">
+                            <h2 class="product__price">$<%= pupil.lastName %></h2>
+                            <p class="product__description"><%= pupil.parentName %></p>
+                        </div>
+                    </article>
+                <% } %>
+            </div>
+        <% } else { %>
+            <h1>No Products Found!</h1>
+        <% } %>
+    </main> -->
+<%- include('../includes/end.ejs') %>

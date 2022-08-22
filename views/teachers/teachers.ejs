@@ -1,0 +1,71 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <head>
+        <title>Fetch using MySQL and Node.js</title>
+      </head>
+      <body>
+          <div class="table-data">
+      <h2>Display Data using Node.js & MySQL</h2>
+      <form class="teacher-form" action="/teachers" method="POST">
+        <div>
+            <ul>
+                <li>
+                    <input type="text" placeholder="name" name="name" value="<%= teachers.name %>">
+                </li>
+                <li>
+                    <input type="text" placeholder="last name" name="lastName" value="<%= teachers.lastName %>">
+                </li>
+                <li>
+                    <input type="text" placeholder="subjects" name="subjects" value="<%= teachers.subjects %>">
+                </li>
+            </ul>
+           
+           
+        </div>
+     <!--    <input type="hidden" value="<%= teachers.id %>" name="teacherId"> -->
+        <button>Add </button>
+      </form>
+          <table border="1">
+              <tr>
+                  <th>S.N</th>
+                  <th>Name</th>
+                  <th>Last Name</th>
+                  <th>Subjects</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                  <th>Details</th>
+              </tr>
+              
+              <%
+              if(teachers.length!=0){
+              var i=1;
+              teachers.forEach((teacher)=>{
+              %>
+              <tr>
+                  <td><%=i; %></td>
+                  <td><%=teacher.name %></td>
+                  <td><%=teacher.lastName %></td>
+                  <td><%=teacher.subjects %></td>
+                  <td><a href="/users/edit/<%=teacher.id%>">Edit</a></td>
+                  <td> 
+                    <form action="/teacher-delete" method="POST">
+                        <input type="hidden" value="<%= teacher.id %>" name="teacherId">
+                        <button class="btn" type="submit">Delete</button>
+                    </form></td>
+                  <td><a href="/teachers/<%= teacher.id %>" class="btn">Details</a></td>
+              </tr>
+              <%  i++; }) %>
+              <% } else{ %>
+                  <tr>
+                      <td colspan="7">No Data Found</td>
+                  </tr>
+              <% } %>
+          </table>
+          </div>
+      </body>
+      </html>
+<%- include('../includes/end.ejs') %>
