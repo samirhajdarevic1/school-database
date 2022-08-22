@@ -20,7 +20,10 @@
                     <input type="text" placeholder="last name" name="lastName" value="<%= teachers.lastName %>">
                 </li>
                 <li>
-                    <input type="text" placeholder="subjects" name="subjects" value="<%= teachers.subjects %>">
+                    <input type="text" placeholder="birthday" name="birthday" value="<%= teachers.birthday %>">
+                </li>
+                <li>
+                    <input type="text" placeholder="gender" name="gender" value="<%= teachers.gender %>">
                 </li>
             </ul>
            
@@ -34,7 +37,8 @@
                   <th>S.N</th>
                   <th>Name</th>
                   <th>Last Name</th>
-                  <th>Subjects</th>
+                  <th>Birthday</th>
+                  <th>Gender</th>
                   <th>Edit</th>
                   <th>Delete</th>
                   <th>Details</th>
@@ -49,7 +53,8 @@
                   <td><%=i; %></td>
                   <td><%=teacher.name %></td>
                   <td><%=teacher.lastName %></td>
-                  <td><%=teacher.subjects %></td>
+                  <td><%=teacher.birthday %></td>
+                  <td><%=teacher.gender %></td>
                   <td><a href="/users/edit/<%=teacher.id%>">Edit</a></td>
                   <td> 
                     <form action="/teacher-delete" method="POST">

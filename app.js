@@ -8,6 +8,9 @@ const sequelize = require('./util/database');
 
 const Teacher = require('./models/teacher');
 const Subject = require('./models/subject');
+const Pupil = require('./models/pupil');
+const SchoolClass = require('./models/school-class');
+const Grade = require('./models/grade');
 
 const app = express();
 
@@ -36,8 +39,14 @@ app.use(subjectRoutes);
 
 app.use(errorController.get404);
 
-Teacher.belongsTo(Subject, { constraints: true, onDelete: 'CASCADE' }); //kad se obriše predmet da se svi učitalji obrišu
-Subject.hasMany(Teacher, { foreignKey: 'id', as: 'Id' });
+/* Teacher.belongsTo(Subject, { constraints: true, onDelete: 'CASCADE' }); //kad se obriše predmet da se svi učitalji obrišu
+Subject.hasMany(Teacher, { foreignKey: 'id', as: 'Id' }); */
+
+Teacher.hasMany(Subject, {
+  constraints: true,
+  onDelete: 'CASCADE',
+});
+Subject.belongsTo(Teacher, { through: 'teacher_subject' });
 
 sequelize
   .sync()
