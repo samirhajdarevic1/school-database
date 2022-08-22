@@ -6,8 +6,8 @@ const bodyParser = require('body-parser');
 const errorController = require('./controllers/error');
 const sequelize = require('./util/database');
 
-const Teacher = require('./models/teachers');
-const Subject = require('./models/subjects');
+const Teacher = require('./models/teacher');
+const Subject = require('./models/subject');
 
 const app = express();
 

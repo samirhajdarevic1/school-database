@@ -1,5 +1,5 @@
 const sequelize = require('../util/database');
-const Pupil = require('../models/pupils');
+const Pupil = require('../models/pupil');
 
 exports.getIndex = (req, res, next) => {
   res.render('pupils/index', {
