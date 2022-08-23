@@ -25,12 +25,17 @@ exports.getPupils = (req, res, next) => {
 exports.postAddPupil = (req, res, next) => {
   const name = req.body.name;
   const lastName = req.body.lastName;
+  const birthday = req.body.birthday;
+  const gender = req.body.gender;
   const father = req.body.father;
   const mother = req.body.mother;
   //create() -> kreira i automatski sprema u bazu
+  req.pupil;
   Pupil.create({
     name: name,
     lastName: lastName,
+    birthday: birthday,
+    gender: gender,
     father: father,
     mother: mother,
   })
