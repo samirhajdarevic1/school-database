@@ -17,7 +17,7 @@ const Teacher = sequelize.define('teacher', {
     allowNull: false,
   },
   birthday: {
-    type: Sequelize.DATE,
+    type: Sequelize.DATEONLY,
     allowNull: false,
   },
   gender: {

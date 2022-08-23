@@ -25,9 +25,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
-  Subject.findByPk(1)
-    .then((subject) => {
-      req.subject = subject; //ovdje cemo imati sequelize object teacher, na kojem možemo primjeniti sequelize motode kao što je npr destroy
+  Teacher.findByPk(1)
+    .then((teacher) => {
+      req.teacher = teacher; //ovdje cemo imati sequelize object teacher, na kojem možemo primjeniti sequelize motode kao što je npr destroy
       next(); //da se nastavi sa sljedecim korakom nakon što smo dobili teachera i spremili ga
     })
     .catch((err) => console.log(err));
@@ -46,25 +46,36 @@ Teacher.hasMany(Subject, {
   constraints: true,
   onDelete: 'CASCADE',
 });
-Subject.belongsTo(Teacher, { through: 'teacher_subject' });
+Subject.belongsToMany(Teacher, { through: 'teacher_subject' });
+
+Pupil.hasMany(Grade);
+Grade.belongsTo(Pupil);
+
+SchoolClass.hasMany(Pupil);
+Pupil.belongsTo(SchoolClass);
+
+Subject.hasMany(Grade);
+Grade.belongsTo(Subject);
 
 sequelize
   .sync()
   .then((result) => {
-    return Subject.findByPk(1);
+    return Teacher.findByPk(1);
     //console.log(result);
   })
-  .then((subject) => {
-    if (!subject) {
-      return Subject.create({
+  .then((teacher) => {
+    if (!teacher) {
+      return Teacher.create({
         name: 'Mjo',
-        teachers: 'Mujic',
+        lastName: 'M',
+        birthday: '12-03-1995',
+        gender: 'M',
       });
     }
-    return subject;
+    return teacher;
   })
-  .then((subject) => {
-    //console.log(teacher);
+  .then((teacher) => {
+    console.log(teacher);
     app.listen(3000);
   })
   .catch((err) => {

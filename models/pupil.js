@@ -51,7 +51,7 @@ const Pupil = sequelize.define('pupil', {
     allowNull: false,
   },
   birthday: {
-    type: Sequelize.DATE,
+    type: Sequelize.DATEONLY,
     allowNull: false,
   },
   gender: {

@@ -26,14 +26,13 @@ exports.postAddTeacher = (req, res, next) => {
   const lastName = req.body.lastName;
   const birthday = req.body.birthday;
   const gender = req.body.gender;
-  console.log(req.subject);
   //create() -> kreira i automatski sprema u bazu
   Teacher.create({
     name: name,
     lastName: lastName,
     birthday: birthday,
     gender: gender,
-    subjectId: req.subject.id,
+    /* subjectId: req.subject.id, */
   })
     .then((result) => {
       // console.log(result);

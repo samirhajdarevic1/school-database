@@ -1,5 +1,6 @@
 <%- include('../includes/head.ejs') %>
     <link rel="stylesheet" href="/css/product.css">
+    <link rel="stylesheet" href="/css/forms.css">
 </head>
 
 <body>
@@ -8,35 +9,44 @@
         <title>Fetch using MySQL and Node.js</title>
       </head>
       <body>
+        <form class="form-control" action="/pupils" method="POST">
+            <div>
+                <ul>
+                    <li>
+                        <input type="text" placeholder="name" name="name" value="<%= pupils.name %>">
+                    </li>
+                    <li>
+                        <input type="text" placeholder="last name" name="lastName" value="<%= pupils.lastName %>">
+                    </li>
+                    <li>
+                        <input type="date" placeholder="birthday" name="birthday" value="<%= pupils.birthday %>">
+                    </li>
+                    <li>
+                        <input type="text" placeholder="gender" name="gender" value="<%= pupils.gender %>">
+                    </li>
+                    <li>
+                        <input type="text" placeholder="fathers name" name="father" value="<%= pupils.father %>">
+                    </li>
+                    <li> 
+                        <input type="text" placeholder="mothers name" name="mother" value="<%= pupils.mother %>">
+                    </li>
+                </ul>
+               
+               
+            </div>
+         <!--    <input type="hidden" value="<%= pupils.id %>" name="pupilId"> -->
+            <button class="btn">Add Pupil</button>
+          </form>
           <div class="table-data">
       <h2>Display Data using Node.js & MySQL</h2>
-      <form class="pupil-form" action="/pupils" method="POST">
-        <div>
-            <ul>
-                <li>
-                    <input type="text" placeholder="name" name="name" value="<%= pupils.name %>">
-                </li>
-                <li>
-                    <input type="text" placeholder="last name" name="lastName" value="<%= pupils.lastName %>">
-                </li>
-                <li>
-                    <input type="text" placeholder="fathers name" name="father" value="<%= pupils.father %>">
-                </li>
-                <li> 
-                    <input type="text" placeholder="mothers name" name="mother" value="<%= pupils.mother %>">
-                </li>
-            </ul>
-           
-           
-        </div>
-     <!--    <input type="hidden" value="<%= pupils.id %>" name="pupilId"> -->
-        <button>Add Pupil</button>
-      </form>
+     
           <table border="1">
               <tr>
                   <th>S.N</th>
                   <th>Name</th>
                   <th>Last Name</th>
+                  <th>Birthday</th>
+                  <th>Gender</th>
                   <th>Fathers Name</th>
                   <th>Mothers Name</th>
                   <th>Edit</th>
@@ -53,6 +63,8 @@
                   <td><%=i; %></td>
                   <td><%=pupil.name %></td>
                   <td><%=pupil.lastName %></td>
+                  <td><%=pupil.birthday %></td>
+                  <td><%=pupil.gender %></td>
                   <td><%=pupil.father %></td>
                   <td><%=pupil.mother %></td>
                   <td><a href="/users/edit/<%=pupil.id%>">Edit</a></td>

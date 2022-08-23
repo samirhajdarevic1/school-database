@@ -207,6 +207,11 @@ form {
   background: red;
   color: white;
 }
+.table-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 @media (min-width: 768px) {
   .main-header__nav {

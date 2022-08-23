@@ -1,5 +1,6 @@
 <%- include('../includes/head.ejs') %>
     <link rel="stylesheet" href="/css/product.css">
+    <link rel="stylesheet" href="/css/forms.css">
 </head>
 
 <body>
@@ -8,30 +9,31 @@
         <title>Fetch using MySQL and Node.js</title>
       </head>
       <body>
+        <form class="form-control" action="/teachers" method="POST">
+            <div>
+                <ul>
+                    <li>
+                        <input type="text" placeholder="name" name="name" value="<%= teachers.name %>">
+                    </li>
+                    <li>
+                        <input type="text" placeholder="last name" name="lastName" value="<%= teachers.lastName %>">
+                    </li>
+                    <li>
+                        <input type="date" placeholder="birthday" name="birthday" value="<%= teachers.birthday %>">
+                    </li>
+                    <li>
+                        <input type="text" placeholder="gender" name="gender" value="<%= teachers.gender %>">
+                    </li>
+                </ul>
+               
+               
+            </div>
+         <!--    <input type="hidden" value="<%= teachers.id %>" name="teacherId"> -->
+            <button class="btn">Add </button>
+          </form>
           <div class="table-data">
       <h2>Display Data using Node.js & MySQL</h2>
-      <form class="teacher-form" action="/teachers" method="POST">
-        <div>
-            <ul>
-                <li>
-                    <input type="text" placeholder="name" name="name" value="<%= teachers.name %>">
-                </li>
-                <li>
-                    <input type="text" placeholder="last name" name="lastName" value="<%= teachers.lastName %>">
-                </li>
-                <li>
-                    <input type="text" placeholder="birthday" name="birthday" value="<%= teachers.birthday %>">
-                </li>
-                <li>
-                    <input type="text" placeholder="gender" name="gender" value="<%= teachers.gender %>">
-                </li>
-            </ul>
-           
-           
-        </div>
-     <!--    <input type="hidden" value="<%= teachers.id %>" name="teacherId"> -->
-        <button>Add </button>
-      </form>
+
           <table border="1">
               <tr>
                   <th>S.N</th>

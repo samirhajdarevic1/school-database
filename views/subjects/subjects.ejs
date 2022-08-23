@@ -1,5 +1,6 @@
 <%- include('../includes/head.ejs') %>
     <link rel="stylesheet" href="/css/product.css">
+    <link rel="stylesheet" href="/css/forms.css">
 </head>
 
 <body>
@@ -9,29 +10,27 @@
       </head>
       <body>
           <div class="table-data">
+            <form class="form-control" action="/subjects" method="POST">
+                <div>
+                    <ul>
+                        <li>
+                            <input type="text" placeholder="subject" name="name" value="<%= subjects.name %>">
+                        </li>
+                       
+                      
+                    </ul>
+                   
+                   
+                </div>
+             <!--    <input type="hidden" value="<%= subjects.id %>" name="subjectId"> -->
+                <button>Add </button>
+              </form>
       <h2>Display Data using Node.js & MySQL</h2>
-      <form class="subject-form" action="/subjects" method="POST">
-        <div>
-            <ul>
-                <li>
-                    <input type="text" placeholder="subject" name="name" value="<%= subjects.name %>">
-                </li>
-                <li>
-                    <input type="text" placeholder="teachers" name="teachers" value="<%= subjects.teachers %>">
-                </li>
-              
-            </ul>
-           
-           
-        </div>
-     <!--    <input type="hidden" value="<%= subjects.id %>" name="subjectId"> -->
-        <button>Add </button>
-      </form>
+     
           <table border="1">
               <tr>
                   <th>S.N</th>
                   <th>Subject</th>
-                  <th>Teachers</th>
                   <th>Edit</th>
                   <th>Delete</th>
                   <th>Details</th>
@@ -45,7 +44,6 @@
               <tr>
                   <td><%=i; %></td>
                   <td><%=subject.name %></td>
-                  <td><%=subject.teachers %></td>
                   <td><a href="/users/edit/<%=subject.id%>">Edit</a></td>
                   <td> 
                     <form action="/subject-delete" method="POST">

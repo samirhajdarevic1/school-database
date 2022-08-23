@@ -23,12 +23,13 @@ exports.getSubjects = (req, res, next) => {
 
 exports.postAddSubject = (req, res, next) => {
   const name = req.body.name;
-  const teachers = req.body.teachers;
   //create() -> kreira i automatski sprema u bazu
-  Subject.create({
+  console.log(req);
+  req.teacher
+    .createSubject({ name: name })
+    /*   Subject.create({
     name: name,
-    teachers: teachers,
-  })
+  }) */
     .then((result) => {
       console.log(result);
       res.redirect('/subjects');
