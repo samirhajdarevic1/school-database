@@ -11,8 +11,9 @@ exports.getIndex = (req, res, next) => {
   });
 };
 exports.getGrades = async (req, res, next) => {
+  const pupilId = req.query.pupilId;
   res.render('grades/grades', {
-    pupils: await Pupil.findAll(),
+    pupil: await Pupil.findByPk(pupilId),
     subjects: await Subject.findAll(),
     grades: await Grade.findAll(),
     pageTitle: 'e-Diary',
@@ -22,13 +23,13 @@ exports.getGrades = async (req, res, next) => {
 
 exports.postAddGrade = async (req, res, next) => {
   const grade = req.body.grade;
-  console.log(grade);
   const subjectId = req.body.subjectId;
-  console.log(subjectId);
+  const pupilId = req.body.pupilId;
   try {
     await Grade.create({
       grade: grade,
       subjectId: subjectId,
+      pupilId: pupilId,
     });
     return res.redirect('grades');
   } catch (err) {
@@ -40,7 +41,6 @@ exports.getGrade = async (req, res, next) => {
   try {
     const pupil = await Pupil.findByPk(pupilId);
     const classes = await SchoolClass.findByPk(pupil.schoolClassId);
-    console.log('Classssesssss: ', classes);
     const response = await res.render('pupils/pupil-detail', {
       pupil: pupil,
       classes: classes,

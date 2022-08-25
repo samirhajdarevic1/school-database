@@ -1,5 +1,6 @@
 const sequelize = require('../util/database');
 const Teacher = require('../models/teacher');
+const Subject = require('../models/subject');
 
 exports.getIndex = (req, res, next) => {
   res.render('teachers/index', {

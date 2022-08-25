@@ -2,6 +2,7 @@ const sequelize = require('../util/database');
 const Pupil = require('../models/pupil');
 const SchoolClass = require('../models/school-class');
 const Subject = require('../models/subject');
+const Grade = require('../models/grade');
 
 exports.getIndex = (req, res, next) => {
   res.render('pupils/index', {
@@ -52,10 +53,13 @@ exports.getPupil = async (req, res, next) => {
     const pupil = await Pupil.findByPk(pupilId);
     const classes = await SchoolClass.findByPk(pupil.schoolClassId);
     const subjects = await Subject.findAll();
+    const grades = await Grade.findAll();
+    console.log(grades);
     const response = await res.render('pupils/pupil-detail', {
       pupil: pupil,
       classes: classes,
       subjects: subjects,
+      grades: grades,
       pageTitle: pupil.name,
       path: '/pupils',
     });

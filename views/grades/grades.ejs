@@ -34,6 +34,7 @@
                       <form action="/grades" method="POST">
                           <input type="number" name="grade" value="<%= grades.grade%>">
                           <input type="hidden" name="subjectId" value="<%= subject.id%>">
+                          <input type="hidden" name="pupilId" value="<%= pupil?.id%>">
                         <button class="btn" type="submit">Submit grade</button>
                     </form></td>
                   <td><a href="/users/edit/<%=subject.id%>">Edit</a></td>

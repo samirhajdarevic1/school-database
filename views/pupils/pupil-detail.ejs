@@ -34,8 +34,12 @@
                           <button class="btn" type="submit">Delete</button>
                       </form>
                     </td>
-                  <!--   <td><a href="/pupils/<%= pupil.id %>" class="btn">Grade pupil</a></td> -->
-                  <td><a href="/grades" class="btn">Grade pupil</a></td>
+                    <td>
+                        <form action="/grades">
+                            <input type="hidden" name="pupilId" value="<%= pupil.id %>">
+                            <button class="btn">Grade pupil</button>
+                        </form>
+                    </td>
                 </tr>
             </table>
             <hr>
@@ -45,6 +49,7 @@
                 <tr>
                     <th>S.N</th>
                     <th>Subject</th>
+                    <th>Grades</th>
                     <th>Edit</th>
                     <th>Delete</th>
                     <th>Details</th>
@@ -58,6 +63,12 @@
                 <tr>
                     <td><%=i; %></td>
                     <td><%=subject.name %></td>
+                    <td>
+                    <% grades.forEach((grade) => {%>
+                       <%if(pupil.id === grade.pupilId && subject.id === grade.subjectId){%>
+                        <p>(<%= grade.grade%>)</p>
+                        <% }%>
+                    <%})%></td>
                     <td><a href="/users/edit/<%=subject.id%>">Edit</a></td>
                     <td> 
                       <form action="/subject-delete" method="POST">
