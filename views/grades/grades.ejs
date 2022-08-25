@@ -1,0 +1,57 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/product.css">
+    <link rel="stylesheet" href="/css/forms.css">
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <head>
+        <title>Fetch using MySQL and Node.js</title>
+      </head>
+      <body>
+          <div class="table-data">
+              <h1>Grading pupil</h1>
+     
+          <table border="1">
+              <tr>
+                  <th>S.N</th>
+                  <th>Subject</th>
+                  <th>Input grade</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                  <th>Details</th>
+              </tr>
+              
+              <%
+              if(subjects.length!=0){
+              var i=1;
+              subjects.forEach((subject)=>{
+              %>
+              <tr>
+                  <td><%=i; %></td>
+                  <td><%=subject.name %></td>
+                  <td> 
+                      <form action="/grades" method="POST">
+                          <input type="number" name="grade" value="<%= grades.grade%>">
+                          <input type="hidden" name="subjectId" value="<%= subject.id%>">
+                        <button class="btn" type="submit">Submit grade</button>
+                    </form></td>
+                  <td><a href="/users/edit/<%=subject.id%>">Edit</a></td>
+                  <td> 
+                    <form action="/subject-delete" method="POST">
+                        <input type="hidden" value="<%= subject.id %>" name="subjectId">
+                        <button class="btn" type="submit">Delete</button>
+                    </form></td>
+                  <td><a href="/subjects/<%= subject.id %>" class="btn">Details</a></td>
+              </tr>
+              <%  i++; }) %>
+              <% } else{ %>
+                  <tr>
+                      <td colspan="7">No Data Found</td>
+                  </tr>
+              <% } %>
+          </table>
+          </div>
+      </body>
+      </html>
+<%- include('../includes/end.ejs') %>

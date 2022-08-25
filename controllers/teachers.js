@@ -7,41 +7,38 @@ exports.getIndex = (req, res, next) => {
     path: '/',
   });
 };
-exports.getTeachers = (req, res, next) => {
-  Teacher.findAll()
-    .then((teachers) => {
-      res.render('teachers/teachers', {
-        teachers: teachers,
-        pageTitle: 'e-Diary',
-        path: '/teachers',
-      });
-    })
-    .catch((err) => {
-      console.log(err);
+exports.getTeachers = async (req, res, next) => {
+  try {
+    const teachers = await Teacher.findAll();
+    await res.render('teachers/teachers', {
+      teachers: teachers,
+      pageTitle: 'Teachers',
+      path: '/teachers',
     });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
-exports.postAddTeacher = (req, res, next) => {
+exports.postAddTeacher = async (req, res, next) => {
   const name = req.body.name;
   const lastName = req.body.lastName;
   const birthday = req.body.birthday;
   const gender = req.body.gender;
-  //create() -> kreira i automatski sprema u bazu
-  Teacher.create({
-    name: name,
-    lastName: lastName,
-    birthday: birthday,
-    gender: gender,
-    /* subjectId: req.subject.id, */
-  })
-    .then((result) => {
-      // console.log(result);
-      res.redirect('/teachers');
-    })
-    .catch((err) => {
-      console.log(err);
+
+  try {
+    const createdTeacher = await Teacher.create({
+      name: name,
+      lastName: lastName,
+      birthday: birthday,
+      gender: gender,
     });
+    await res.redirect('/teachers');
+  } catch (err) {
+    console.log(err);
+  }
 };
+
 exports.getTeacher = (req, res, next) => {
   const TeacherId = req.params.TeacherId;
   console.log('ID:', TeacherId);
@@ -56,16 +53,15 @@ exports.getTeacher = (req, res, next) => {
     })
     .catch((err) => console.log(err));
 };
-exports.postDeleteTeacher = (req, res, next) => {
+exports.postDeleteTeacher = async (req, res, next) => {
   const teacherId = req.body.teacherId;
   console.log(teacherId);
-  Teacher.findByPk(teacherId)
-    .then((teacher) => {
-      return teacher.destroy();
-    })
-    .then((result) => {
-      console.log('DESTROYED TEACHER');
-      res.redirect('teachers');
-    })
-    .catch((err) => console.log(err));
+  try {
+    const teacher = await Teacher.findByPk(teacherId);
+    console.log('DESTROYING TEACHER');
+    await teacher.destroy();
+    await res.redirect('/teachers');
+  } catch (err) {
+    console.log(err);
+  }
 };

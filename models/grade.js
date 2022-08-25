@@ -12,9 +12,5 @@ const Grade = sequelize.define('grade', {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
-  gradesDate: {
-    type: Sequelize.DATE,
-    allowNull: false,
-  },
 });
 module.exports = Grade;

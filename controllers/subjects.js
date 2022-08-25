@@ -12,7 +12,7 @@ exports.getSubjects = (req, res, next) => {
     .then((subjects) => {
       res.render('subjects/subjects', {
         subjects: subjects,
-        pageTitle: 'e-Diary',
+        pageTitle: 'Subjects',
         path: '/subjects',
       });
     })
@@ -21,22 +21,14 @@ exports.getSubjects = (req, res, next) => {
     });
 };
 
-exports.postAddSubject = (req, res, next) => {
+exports.postAddSubject = async (req, res, next) => {
   const name = req.body.name;
-  //create() -> kreira i automatski sprema u bazu
-  console.log(req);
-  req.teacher
-    .createSubject({ name: name })
-    /*   Subject.create({
-    name: name,
-  }) */
-    .then((result) => {
-      console.log(result);
-      res.redirect('/subjects');
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  try {
+    const createdSubject = await Subject.create({ name: name });
+    await res.redirect('/subjects');
+  } catch (err) {
+    console.log(err);
+  }
 };
 /* exports.getsubject = (req, res, next) => {
   const subjectId = req.params.subjectId;

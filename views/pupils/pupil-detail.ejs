@@ -4,10 +4,74 @@
     <body>
         <%- include('../includes/navigation.ejs') %>
         <main class="centered">
-            <h1><%= pupil.name %></h1>
+            <h1><%= pupil.name.toUpperCase() %> <%= pupil.lastName.toUpperCase() %></h1>
             <hr>
-            <h2><%= pupil.lastName %></h2>
-            <p><%= pupil.father %></p>
-            <p><%= pupil.mother %></p>
+            <table border="1">
+                <tr>
+                    <th>Name</th>
+                    <th>Last Name</th>
+                    <th>Birthday</th>
+                    <th>Gender</th>
+                    <th>Fathers Name</th>
+                    <th>Mothers Name</th>
+                    <th>Class</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td><%=pupil.name %></td>
+                    <td><%=pupil.lastName %></td>
+                    <td><%=pupil.birthday %></td>
+                    <td><%=pupil.gender %></td>
+                    <td><%=pupil.father %></td>
+                    <td><%=pupil.mother %></td>
+                    <td><%=classes.name.toUpperCase() %></td>
+                    <td><a href="/users/edit/<%=pupil.id%>">Edit</a></td>
+                    <td>
+                      <form action="/pupil-delete" method="POST">
+                          <input type="hidden" value="<%= pupil.id %>" name="pupilId">
+                          <button class="btn" type="submit">Delete</button>
+                      </form>
+                    </td>
+                  <!--   <td><a href="/pupils/<%= pupil.id %>" class="btn">Grade pupil</a></td> -->
+                  <td><a href="/grades" class="btn">Grade pupil</a></td>
+                </tr>
+            </table>
+            <hr>
+            <h1>Subjects and Grades</h1>
+            <hr>
+            <table border="1">
+                <tr>
+                    <th>S.N</th>
+                    <th>Subject</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    <th>Details</th>
+                </tr>
+                
+                <%
+                if(subjects.length!=0){
+                var i=1;
+                subjects.forEach((subject)=>{
+                %>
+                <tr>
+                    <td><%=i; %></td>
+                    <td><%=subject.name %></td>
+                    <td><a href="/users/edit/<%=subject.id%>">Edit</a></td>
+                    <td> 
+                      <form action="/subject-delete" method="POST">
+                          <input type="hidden" value="<%= subject.id %>" name="subjectId">
+                          <button class="btn" type="submit">Delete</button>
+                      </form></td>
+                    <td><a href="/subjects/<%= subject.id %>" class="btn">Details</a></td>
+                </tr>
+                <%  i++; }) %>
+                <% } else{ %>
+                    <tr>
+                        <td colspan="7">No Data Found</td>
+                    </tr>
+                <% } %>
+            </table>
         </main>
         <%- include('../includes/end.ejs') %>

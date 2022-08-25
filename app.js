@@ -20,27 +20,19 @@ app.set('views', 'views');
 const pupilsRoutes = require('./routes/pupils');
 const teachersRoutes = require('./routes/teachers');
 const subjectRoutes = require('./routes/subjects');
+const schoolClassesRoutes = require('./routes/classes');
+const gradeRoutes = require('./routes/grades');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use((req, res, next) => {
-  Teacher.findByPk(1)
-    .then((teacher) => {
-      req.teacher = teacher; //ovdje cemo imati sequelize object teacher, na kojem možemo primjeniti sequelize motode kao što je npr destroy
-      next(); //da se nastavi sa sljedecim korakom nakon što smo dobili teachera i spremili ga
-    })
-    .catch((err) => console.log(err));
-});
-
 app.use(pupilsRoutes);
 app.use(teachersRoutes);
 app.use(subjectRoutes);
+app.use(schoolClassesRoutes);
+app.use(gradeRoutes);
 
 app.use(errorController.get404);
-
-/* Teacher.belongsTo(Subject, { constraints: true, onDelete: 'CASCADE' }); //kad se obriše predmet da se svi učitalji obrišu
-Subject.hasMany(Teacher, { foreignKey: 'id', as: 'Id' }); */
 
 Teacher.hasMany(Subject, {
   constraints: true,
@@ -58,24 +50,8 @@ Subject.hasMany(Grade);
 Grade.belongsTo(Subject);
 
 sequelize
-  .sync()
-  .then((result) => {
-    return Teacher.findByPk(1);
-    //console.log(result);
-  })
-  .then((teacher) => {
-    if (!teacher) {
-      return Teacher.create({
-        name: 'Mjo',
-        lastName: 'M',
-        birthday: '12-03-1995',
-        gender: 'M',
-      });
-    }
-    return teacher;
-  })
-  .then((teacher) => {
-    console.log(teacher);
+  .sync({ force: false })
+  .then((rrr) => {
     app.listen(3000);
   })
   .catch((err) => {
