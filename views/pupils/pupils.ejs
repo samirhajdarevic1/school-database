@@ -7,91 +7,94 @@
     <%- include('../includes/navigation.ejs') %>
     <head>
         <title>Fetch using MySQL and Node.js</title>
-      </head>
-      <body>
-        <form class="form-control" action="/pupils" method="POST">
-            <div>
-                <ul>
-                    <li>
-                        <input type="text" placeholder="name" name="name" value="<%= pupils.name %>">
-                    </li>
-                    <li>
-                        <input type="text" placeholder="last name" name="lastName" value="<%= pupils.lastName %>">
-                    </li>
-                    <li>
-                        <input type="date" placeholder="birthday" name="birthday" value="<%= pupils.birthday %>">
-                    </li>
-                    <li>
-                        <input type="text" placeholder="gender" name="gender" value="<%= pupils.gender %>">
-                    </li>
-                    <li>
-                        <input type="text" placeholder="fathers name" name="father" value="<%= pupils.father %>">
-                    </li>
-                    <li> 
-                        <input type="text" placeholder="mothers name" name="mother" value="<%= pupils.mother %>">
-                    </li>
-                    <% if(classes){ %> 
-                        <li> 
-                            <select name="schoolClass">
-                                <% classes.forEach((item) => { %>
-                                    <option value="<%= item.id %>"><%= item.name %></option>
-                                <% }); %>
-                            </select>
+    </head>
+    <main class="centered">
+        <body>
+            <form class="form-control" action="/pupils" method="POST">
+                <div>
+                    <ul>
+                        <li>
+                            <input type="text" placeholder="name" name="name" value="<%= pupils.name %>">
                         </li>
-                    <% } %>
-                </ul>
-            </div>
-            <button class="btn">Add Pupil</button>
-          </form>
-
-          <div class="table-data">
-      <h2>List of all pupils</h2>
-     
-          <table border="1">
-              <tr>
-                  <th>S.N</th>
-                  <th>Name</th>
-                  <th>Last Name</th>
-                  <th>Birthday</th>
-                  <th>Gender</th>
-                  <th>Fathers Name</th>
-                  <th>Mothers Name</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
-                  <th>Details</th>
-              </tr>
-              
-              <%
-              if(pupils.length!=0){
-              var i=1;
-              pupils.forEach((pupil)=>{
-              %>
-              <tr>
-                  <td><%=i; %></td>
-                  <td><%=pupil.name %></td>
-                  <td><%=pupil.lastName %></td>
-                  <td><%=pupil.birthday %></td>
-                  <td><%=pupil.gender %></td>
-                  <td><%=pupil.father %></td>
-                  <td><%=pupil.mother %></td>
-                  <td><a href="/users/edit/<%=pupil.id%>">Edit</a></td>
-                  <td>
-                    <form action="/pupil-delete" method="POST">
-                        <input type="hidden" value="<%= pupil.id %>" name="pupilId">
-                        <button class="btn" type="submit">Delete</button>
-                    </form>
-                  </td>
-                  <td><a href="/pupils/<%= pupil.id %>" class="btn">Details</a></td>
-              </tr>
-              <%  i++; }) %>
-              <% } else{ %>
+                        <li>
+                            <input type="text" placeholder="last name" name="lastName" value="<%= pupils.lastName %>">
+                        </li>
+                        <li>
+                            <input type="date" placeholder="birthday" name="birthday" value="<%= pupils.birthday %>">
+                        </li>
+                        <li>
+                            <input type="text" placeholder="gender" name="gender" value="<%= pupils.gender %>">
+                        </li>
+                        <li>
+                            <input type="text" placeholder="fathers name" name="father" value="<%= pupils.father %>">
+                        </li>
+                        <li> 
+                            <input type="text" placeholder="mothers name" name="mother" value="<%= pupils.mother %>">
+                        </li>
+                        <% if(classes){ %> 
+                            <li> 
+                                <select name="schoolClass">
+                                    <% classes.forEach((item) => { %>
+                                        <option value="<%= item.id %>"><%= item.name %></option>
+                                    <% }); %>
+                                </select>
+                            </li>
+                        <% } %>
+                    </ul>
+                </div>
+                <button class="btn">Add Pupil</button>
+              </form>
+    
+              <div class="table-data">
+          <h2>List of all pupils</h2>
+         
+              <table border="1">
                   <tr>
-                      <td colspan="7">No Data Found</td>
+                      <th>S.N</th>
+                      <th>Name</th>
+                      <th>Last Name</th>
+                      <th>Birthday</th>
+                      <th>Gender</th>
+                      <th>Fathers Name</th>
+                      <th>Mothers Name</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                      <th>Details</th>
                   </tr>
-              <% } %>
-          </table>
-          </div>
-      </body>
+                  
+                  <%
+                  if(pupils.length!=0){
+                  var i=1;
+                  pupils.forEach((pupil)=>{
+                  %>
+                  <tr>
+                      <td><%=i; %></td>
+                      <td><%=pupil.name %></td>
+                      <td><%=pupil.lastName %></td>
+                      <td><%=pupil.birthday %></td>
+                      <td><%=pupil.gender %></td>
+                      <td><%=pupil.father %></td>
+                      <td><%=pupil.mother %></td>
+                      <td><a href="/users/edit/<%=pupil.id%>">Edit</a></td>
+                      <td>
+                        <form action="/pupil-delete" method="POST">
+                            <input type="hidden" value="<%= pupil.id %>" name="pupilId">
+                            <button class="btn" type="submit">Delete</button>
+                        </form>
+                      </td>
+                      <td><a href="/pupils/<%= pupil.id %>" class="btn">Details</a></td>
+                  </tr>
+                  <%  i++; }) %>
+                  <% } else{ %>
+                      <tr>
+                          <td colspan="7">No Data Found</td>
+                      </tr>
+                  <% } %>
+              </table>
+              </div>
+          </body>
+    </main>
+    
       </html>
 
 <%- include('../includes/end.ejs') %>

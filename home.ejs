@@ -1,8 +1,12 @@
-<%- include('../includes/head.ejs') %>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Home Page</title>
     </head>
-
     <body>
-        <%- include('../includes/navigation.ejs') %>
         <main class="centered">
             <h1><%= pupil.name.toUpperCase() %> <%= pupil.lastName.toUpperCase() %></h1>
             <hr>
@@ -50,50 +54,32 @@
                     <th>S.N</th>
                     <th>Subject</th>
                     <th>Grades</th>
-                    <th>Final grade</th>
                     <th>Edit</th>
                     <th>Delete</th>
                     <th>Details</th>
                 </tr>
                 
-                <%
-                if(subjects.length!=0){
-                var i=1;
-                subjects.forEach((subject)=>{
-                %>
+                <% if(subjects.length !== 0){ var i=1; subjects.forEach((subject)=>{ %>
                 <tr>
                     <td><%=i; %></td>
                     <td><%=subject.name %></td>
                     <td>
                     <% grades.forEach((grade) => {%>
-                       <%if(pupil.id === grade.pupilId && subject.id === grade.subjectId){%>
+                       <%if(pupil.id === grade.pupilId && subject.id === grade.subjectId){ %>
                         <p>(<%= grade.grade%>)</p>
-                        <% }%>
+                        <% } %>
                     <%})%>
                     
                     </td>
                     <td>
-                        <% var y = []; %>
-                        <% const x = grades.map((grade) => {%>
-                            <% if(pupil.id === grade.pupilId && subject.id === grade.subjectId){%>
-                                <% y.push(grade.grade)%>
-                            <% return grade.grade %>
+                        <% let x = grades.reduce((total, grade) => {%>
+                           <% if(pupil.id === grade.pupilId && subject.id === grade.subjectId){%>
+                            <% return total + grade.grade %>
                             <% } %>
-                        <% } )%>
-
-                        <% let k = y.reduce((total, curr) => {%>
-                             <% return total + curr %>
-                         <% },0 )%>
-
-                            <% if(!k){%>
-                                <p colspan="7">Not graded</p>
-                                <%} else{ %>
-                          
-                                    <p><%= Math.round(k/(y.length))  %></p>
-                            <% } %>
-                            
+                            <% }, 0  )%>
+                        <p>(<%= x %>)</p>
                     </td>
-                    <td><a href="/users/edit/<%=subject.id%>">Edit</a></td>
+                    <td><a href="/users/edit/<%= subject.id %>">Edit</a></td>
                     <td> 
                       <form action="/subject-delete" method="POST">
                           <input type="hidden" value="<%= subject.id %>" name="subjectId">
@@ -102,11 +88,11 @@
                     <td><a href="/subjects/<%= subject.id %>" class="btn">Details</a></td>
                 </tr>
                 <%  i++; }) %>
-                <% } else{ %>
+                <% } else { %>
                     <tr>
                         <td colspan="7">No Data Found</td>
                     </tr>
                 <% } %>
             </table>
-        </main>
-        <%- include('../includes/end.ejs') %>
+    </body>
+</html>

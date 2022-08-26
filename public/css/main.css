@@ -21,6 +21,8 @@ form {
 
 .centered {
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .main-header {

@@ -31,7 +31,7 @@ exports.postAddGrade = async (req, res, next) => {
       subjectId: subjectId,
       pupilId: pupilId,
     });
-    return res.redirect('grades');
+    return res.redirect('/pupils/' + pupilId.toString());
   } catch (err) {
     console.log(err);
   }
