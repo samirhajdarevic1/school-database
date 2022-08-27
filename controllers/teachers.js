@@ -11,8 +11,11 @@ exports.getIndex = (req, res, next) => {
 exports.getTeachers = async (req, res, next) => {
   try {
     const teachers = await Teacher.findAll();
+    const subjects = await Subject.findAll();
+    console.log(subjects);
     await res.render('teachers/teachers', {
       teachers: teachers,
+      subjects: subjects,
       pageTitle: 'Teachers',
       path: '/teachers',
     });

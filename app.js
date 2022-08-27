@@ -34,7 +34,8 @@ app.use(gradeRoutes);
 
 app.use(errorController.get404);
 
-Teacher.hasMany(Subject, {
+Teacher.belongsToMany(Subject, {
+  through: 'teacher_subject',
   constraints: true,
   onDelete: 'CASCADE',
 });
