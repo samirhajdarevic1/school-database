@@ -53,8 +53,6 @@ exports.getGrade = async (req, res, next) => {
 };
 exports.postDeleteGrade = async (req, res, next) => {
   const pupilId = req.body.pupilId;
-  console.log(pupilId);
-
   try {
     console.log('Destroying pupil');
     const pupil = await Pupil.findByPk(pupilId);

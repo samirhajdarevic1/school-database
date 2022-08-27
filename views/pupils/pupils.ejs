@@ -31,67 +31,73 @@
                         <li> 
                             <input type="text" placeholder="mothers name" name="mother" value="<%= pupils.mother %>">
                         </li>
-                        <% if(classes){ %> 
-                            <li> 
-                                <select name="schoolClass">
-                                    <% classes.forEach((item) => { %>
-                                        <option value="<%= item.id %>"><%= item.name %></option>
-                                    <% }); %>
-                                </select>
-                            </li>
-                        <% } %>
+                        <div >
+                            <label style="display: flex; border: 1px solid gray;">Choose school class</label>
+                            <% if(classes){ %> 
+                                <li> 
+                                    <select name="schoolClass">
+                                        <% classes.forEach((item) => { %>
+                                            <option value="<%= item.id %>"><%= item.name %></option>
+                                        <% }); %>
+                                    </select>
+                                </li>
+                            <% } %>
+                        </div>
+                        
                     </ul>
                 </div>
                 <button class="btn">Add Pupil</button>
               </form>
-    
-              <div class="table-data">
-          <h2>List of all pupils</h2>
-         
-              <table border="1">
-                  <tr>
-                      <th>S.N</th>
-                      <th>Name</th>
-                      <th>Last Name</th>
-                      <th>Birthday</th>
-                      <th>Gender</th>
-                      <th>Fathers Name</th>
-                      <th>Mothers Name</th>
-                      <th>Edit</th>
-                      <th>Delete</th>
-                      <th>Details</th>
-                  </tr>
-                  
-                  <%
-                  if(pupils.length!=0){
-                  var i=1;
-                  pupils.forEach((pupil)=>{
-                  %>
-                  <tr>
-                      <td><%=i; %></td>
-                      <td><%=pupil.name %></td>
-                      <td><%=pupil.lastName %></td>
-                      <td><%=pupil.birthday %></td>
-                      <td><%=pupil.gender %></td>
-                      <td><%=pupil.father %></td>
-                      <td><%=pupil.mother %></td>
-                      <td><a href="/users/edit/<%=pupil.id%>">Edit</a></td>
-                      <td>
-                        <form action="/pupil-delete" method="POST">
-                            <input type="hidden" value="<%= pupil.id %>" name="pupilId">
-                            <button class="btn" type="submit">Delete</button>
-                        </form>
-                      </td>
-                      <td><a href="/pupils/<%= pupil.id %>" class="btn">Details</a></td>
-                  </tr>
-                  <%  i++; }) %>
-                  <% } else{ %>
-                      <tr>
-                          <td colspan="7">No Data Found</td>
-                      </tr>
-                  <% } %>
-              </table>
-              </div>
+    <% if(pupils.length !=0){%>
+        <div class="table-data">
+            <h2>List of all pupils</h2>
+           
+                <table border="1">
+                    <tr>
+                        <th>S.N</th>
+                        <th>Name</th>
+                        <th>Last Name</th>
+                        <th>Birthday</th>
+                        <th>Gender</th>
+                        <th>Fathers Name</th>
+                        <th>Mothers Name</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                        <th>Details</th>
+                    </tr>
+                    
+                    <%
+                    if(pupils.length!=0){
+                    var i=1;
+                    pupils.forEach((pupil)=>{
+                    %>
+                    <tr>
+                        <td><%=i; %></td>
+                        <td><%=pupil.name %></td>
+                        <td><%=pupil.lastName %></td>
+                        <td><%=pupil.birthday %></td>
+                        <td><%=pupil.gender %></td>
+                        <td><%=pupil.father %></td>
+                        <td><%=pupil.mother %></td>
+                        <td><a href="/users/edit/<%=pupil.id%>">Edit</a></td>
+                        <td>
+                          <form action="/pupil-delete" method="POST">
+                              <input type="hidden" value="<%= pupil.id %>" name="pupilId">
+                              <button class="btn" type="submit">Delete</button>
+                          </form>
+                        </td>
+                        <td><a href="/pupils/<%= pupil.id %>" class="btn">Details</a></td>
+                    </tr>
+                    <%  i++; }) %>
+                    <% } else{ %>
+                        <tr>
+                            <td colspan="7">No Data Found</td>
+                        </tr>
+                    <% } %>
+                </table>
+                </div>
+    <%}%>
+           
           </body>
     </main>
     

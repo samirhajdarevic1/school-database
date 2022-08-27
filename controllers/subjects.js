@@ -1,5 +1,7 @@
 const sequelize = require('../util/database');
 const Subject = require('../models/subject');
+const TeacherSubject = require('../models/teacher-subject');
+const Teacher = require('../models/teacher');
 
 exports.getIndex = (req, res, next) => {
   res.render('teachers/index', {
@@ -7,24 +9,32 @@ exports.getIndex = (req, res, next) => {
     path: '/',
   });
 };
-exports.getSubjects = (req, res, next) => {
-  Subject.findAll()
-    .then((subjects) => {
-      res.render('subjects/subjects', {
-        subjects: subjects,
-        pageTitle: 'Subjects',
-        path: '/subjects',
-      });
-    })
-    .catch((err) => {
-      console.log(err);
+exports.getSubjects = async (req, res, next) => {
+  try {
+    const teacherSubject = await TeacherSubject.findAll();
+    const teachers = await Teacher.findAll();
+    const subjects = await Subject.findAll();
+    res.render('subjects/subjects', {
+      subjects: subjects,
+      teachers: teachers,
+      teacherSubject: teacherSubject,
+      pageTitle: 'Subjects',
+      path: '/subjects',
     });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 exports.postAddSubject = async (req, res, next) => {
   const name = req.body.name;
+  const teacherId = req.body.teacher;
   try {
     const createdSubject = await Subject.create({ name: name });
+    await TeacherSubject.create({
+      teacherId: teacherId,
+      subjectId: createdSubject.id,
+    });
     await res.redirect('/subjects');
   } catch (err) {
     console.log(err);
@@ -46,7 +56,6 @@ exports.postAddSubject = async (req, res, next) => {
 }; */
 exports.postDeleteSubject = (req, res, next) => {
   const subjectId = req.body.subjectId;
-  console.log(subjectId);
   Subject.findByPk(subjectId)
     .then((subject) => {
       return subject.destroy();

@@ -11,6 +11,7 @@ const Subject = require('./models/subject');
 const Pupil = require('./models/pupil');
 const SchoolClass = require('./models/school-class');
 const Grade = require('./models/grade');
+const TeacherSubject = require('./models/teacher-subject');
 
 const app = express();
 
@@ -34,12 +35,10 @@ app.use(gradeRoutes);
 
 app.use(errorController.get404);
 
-Teacher.belongsToMany(Subject, {
-  through: 'teacher_subject',
-  constraints: true,
-  onDelete: 'CASCADE',
-});
-Subject.belongsToMany(Teacher, { through: 'teacher_subject' });
+TeacherSubject.belongsTo(Teacher);
+Teacher.hasMany(TeacherSubject);
+TeacherSubject.belongsTo(Subject);
+Subject.hasMany(TeacherSubject);
 
 Pupil.hasMany(Grade);
 Grade.belongsTo(Pupil);

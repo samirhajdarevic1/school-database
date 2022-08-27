@@ -26,10 +26,7 @@ exports.postAddPupil = async (req, res, next) => {
   const gender = req.body.gender;
   const father = req.body.father;
   const mother = req.body.mother;
-  console.log(mother);
-  console.log(req.body);
   const classId = req.body.schoolClass;
-  console.log(classId);
   //create() -> kreira i automatski sprema u bazu
   try {
     await Pupil.create({
@@ -48,13 +45,11 @@ exports.postAddPupil = async (req, res, next) => {
 };
 exports.getPupil = async (req, res, next) => {
   const pupilId = req.params.pupilId;
-  console.log('ID:', pupilId);
   try {
     const pupil = await Pupil.findByPk(pupilId);
     const classes = await SchoolClass.findByPk(pupil.schoolClassId);
     const subjects = await Subject.findAll();
     const grades = await Grade.findAll();
-    console.log(grades);
     const response = await res.render('pupils/pupil-detail', {
       pupil: pupil,
       classes: classes,
@@ -69,8 +64,6 @@ exports.getPupil = async (req, res, next) => {
 };
 exports.postDeletePupil = async (req, res, next) => {
   const pupilId = req.body.pupilId;
-  console.log(pupilId);
-
   try {
     console.log('Destroying pupil');
     const pupil = await Pupil.findByPk(pupilId);

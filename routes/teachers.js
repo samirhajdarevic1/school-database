@@ -12,6 +12,8 @@ router.get('/teachers', teachersController.getTeachers);
 
 router.get('/teachers/:teacherId', teachersController.getTeacher);
 
+router.post('/teacher-subject', teachersController.postTeacherSubject);
+
 router.post('/teachers', teachersController.postAddTeacher);
 
 router.post('/teacher-delete', teachersController.postDeleteTeacher);

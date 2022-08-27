@@ -16,21 +16,27 @@
                         <li>
                             <input type="text" placeholder="subject" name="name" value="<%= subjects.name %>">
                         </li>
-                       
+                        <li> 
+                            <select name="teacher">
+                                <% teachers.forEach((teacher) => { %>
+                                    <option value="<%= teacher.id %>"><%= teacher.name %></option>
+                                <% }); %>
+                            </select>
+                        </li>
                       
                     </ul>
                    
                    
                 </div>
-             <!--    <input type="hidden" value="<%= subjects.id %>" name="subjectId"> -->
-                <button>Add </button>
+                <button class="btn">Add </button>
               </form>
-      <h2>Display Data using Node.js & MySQL</h2>
+      <h2>List of all subjects and their teachers</h2>
      
           <table border="1">
               <tr>
                   <th>S.N</th>
                   <th>Subject</th>
+                  <th>Subjects Teachers</th>
                   <th>Edit</th>
                   <th>Delete</th>
                   <th>Details</th>
@@ -44,6 +50,16 @@
               <tr>
                   <td><%=i; %></td>
                   <td><%=subject.name %></td>
+                  <td>
+                    <% teachers.forEach((teacher)=>{%>
+                
+                        <% teacherSubject.forEach((ts)=>{%>
+                            <% if(ts.teacherId === teacher.id && ts.subjectId === subject.id){%> 
+                                <p><%= teacher.name%></p> 
+                            <%}%>
+                            <%})%>
+                    <%})%>
+                  </td>
                   <td><a href="/users/edit/<%=subject.id%>">Edit</a></td>
                   <td> 
                     <form action="/subject-delete" method="POST">

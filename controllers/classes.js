@@ -12,9 +12,7 @@ exports.getClasses = async (req, res, next) => {
   const classId = req.query.schoolClass;
   try {
     const schoolClass = await SchoolClass.findByPk(classId);
-    console.log(schoolClass);
     const pupils = await Pupil.findAll();
-    console.log(pupils);
     const classes = await SchoolClass.findAll();
     const response = await res.render('classes/classes', {
       schoolClass: schoolClass,
@@ -40,9 +38,7 @@ exports.postAddClass = async (req, res, next) => {
   }
 };
 exports.getClass = async (req, res, next) => {
-  console.log('OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
   const classId = req.query.schoolClass;
-  console.log('IDDDDDDDDDDDDDDDDDDDDDDDd:', classId);
   try {
     const classes = await SchoolClass.findByPk(classId);
     const pupil = await Pupil.findByPk(classes.pupilId);
@@ -58,8 +54,6 @@ exports.getClass = async (req, res, next) => {
 };
 exports.postDeleteClass = async (req, res, next) => {
   const classId = req.body.classId;
-  console.log(classId);
-
   try {
     console.log('Destroying Class');
     const schoolClass = await SchoolClass.findByPk(classId);

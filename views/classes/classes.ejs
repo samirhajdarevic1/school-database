@@ -22,20 +22,18 @@
               </form>
               <h1>Choose class</h1>
      
-                <div> 
-    
-                    <form action="/classes" >
-                        <select name="schoolClass">
-                            <% classes.forEach((schoolClass) => { %>
-                                    <option value="<%= schoolClass.id %>"><%= schoolClass.name %> </option>
-                                
-                            <% }); %>
-                        </select>
-                        <button type="submit" class="btn">Pretraži</button>
+                    <form class="form-control" action="/classes" >
+                        <div>
+                            <select name="schoolClass">
+                                <% classes.forEach((schoolClass) => { %>
+                                        <option value="<%= schoolClass.id %>"><%= schoolClass.name %> </option>
+                                    
+                                <% }); %>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn">Pretraži</button>         
                     </form>
-                    
-                </div>
-        
+       
     
               <div class="table-data">
           <h2>List of all pupils</h2>
