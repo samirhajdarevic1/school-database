@@ -84,7 +84,7 @@ exports.getTeacher = (req, res, next) => {
 };
 exports.postDeleteTeacher = async (req, res, next) => {
   const teacherId = req.body.teacherId;
-  console.log(teacherId);
+  console.log(' OOOOOOOOOOOOOOOOOOOOOOO', teacherId);
   try {
     const teacher = await Teacher.findByPk(teacherId);
     console.log('DESTROYING TEACHER');

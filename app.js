@@ -35,10 +35,18 @@ app.use(gradeRoutes);
 
 app.use(errorController.get404);
 
-TeacherSubject.belongsTo(Teacher);
-Teacher.hasMany(TeacherSubject);
-TeacherSubject.belongsTo(Subject);
-Subject.hasMany(TeacherSubject);
+TeacherSubject.belongsTo(Teacher, { constraints: true, onDelete: 'CASCADE' });
+Teacher.hasMany(TeacherSubject, {
+  constraints: true,
+  onDelete: 'CASCADE',
+  hooks: true,
+});
+TeacherSubject.belongsTo(Subject, { constraints: true, onDelete: 'CASCADE' });
+Subject.hasMany(TeacherSubject, {
+  constraints: true,
+  onDelete: 'CASCADE',
+  hooks: true,
+});
 
 Pupil.hasMany(Grade);
 Grade.belongsTo(Pupil);

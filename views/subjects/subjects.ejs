@@ -16,66 +16,68 @@
                         <li>
                             <input type="text" placeholder="subject" name="name" value="<%= subjects.name %>">
                         </li>
-                        <li> 
-                            <select name="teacher">
-                                <% teachers.forEach((teacher) => { %>
-                                    <option value="<%= teacher.id %>"><%= teacher.name %></option>
-                                <% }); %>
-                            </select>
-                        </li>
-                      
+                        <div>
+                            <label style="display: flex; border: 1px solid gray; text-align: center;">Choose teacher</label>
+                            <li> 
+                                <select name="teacher">
+                                    <% teachers.forEach((teacher) => { %>
+                                        <option value="<%= teacher.id %>"><%= teacher.name %></option>
+                                    <% }); %>
+                                </select>
+                            </li>      
+                        </div>   
                     </ul>
-                   
-                   
                 </div>
                 <button class="btn">Add </button>
-              </form>
-      <h2>List of all subjects and their teachers</h2>
-     
-          <table border="1">
-              <tr>
-                  <th>S.N</th>
-                  <th>Subject</th>
-                  <th>Subjects Teachers</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
-                  <th>Details</th>
-              </tr>
-              
-              <%
-              if(subjects.length!=0){
-              var i=1;
-              subjects.forEach((subject)=>{
-              %>
-              <tr>
-                  <td><%=i; %></td>
-                  <td><%=subject.name %></td>
-                  <td>
-                    <% teachers.forEach((teacher)=>{%>
-                
-                        <% teacherSubject.forEach((ts)=>{%>
-                            <% if(ts.teacherId === teacher.id && ts.subjectId === subject.id){%> 
-                                <p><%= teacher.name%></p> 
-                            <%}%>
-                            <%})%>
-                    <%})%>
-                  </td>
-                  <td><a href="/users/edit/<%=subject.id%>">Edit</a></td>
-                  <td> 
-                    <form action="/subject-delete" method="POST">
-                        <input type="hidden" value="<%= subject.id %>" name="subjectId">
-                        <button class="btn" type="submit">Delete</button>
-                    </form></td>
-                  <td><a href="/subjects/<%= subject.id %>" class="btn">Details</a></td>
-              </tr>
-              <%  i++; }) %>
-              <% } else{ %>
-                  <tr>
-                      <td colspan="7">No Data Found</td>
-                  </tr>
-              <% } %>
-          </table>
-          </div>
+            </form>
+            <% if(subjects.length !==0) {%>
+                <h2>List of all subjects and their teachers</h2>
+                <table border="1">
+                    <tr>
+                        <th>S.N</th>
+                        <th>Subject</th>
+                        <th>Subjects Teachers</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                        <th>Details</th>
+                    </tr>
+                    
+                    <%
+                    if(subjects.length!=0){
+                    var i=1;
+                    subjects.forEach((subject)=>{
+                    %>
+                    <tr>
+                        <td><%=i; %></td>
+                        <td><%=subject.name %></td>
+                        <td>
+                          <% teachers.forEach((teacher)=>{%>
+                      
+                              <% teacherSubject.forEach((ts)=>{%>
+                                  <% if(ts.teacherId === teacher.id && ts.subjectId === subject.id){%> 
+                                      <p><%= teacher.name%></p> 
+                                  <%}%>
+                                  <%})%>
+                          <%})%>
+                        </td>
+                        <td><a href="/users/edit/<%=subject.id%>">Edit</a></td>
+                        <td> 
+                          <form action="/subject-delete" method="POST">
+                              <input type="hidden" value="<%= subject.id %>" name="subjectId">
+                              <button class="btn" type="submit">Delete</button>
+                          </form></td>
+                        <td><a href="/subjects/<%= subject.id %>" class="btn">Details</a></td>
+                    </tr>
+                    <%  i++; }) %>
+                    <% } else{ %>
+                        <tr>
+                            <td colspan="7">No Data Found</td>
+                        </tr>
+                    <% } %>
+                </table>
+                </div>
+                <%}%>
+          
       </body>
       </html>
 <%- include('../includes/end.ejs') %>

@@ -14,30 +14,31 @@
                 <div>
                     <ul>
                         <li>
-                            <input type="text" placeholder="name" name="name" value="<%= classes.name %>">
+                            <input type="text" placeholder="Class name" name="name" value="<%= classes.name %>">
                         </li>
                     </ul>
                 </div>
                 <button class="btn">Add Class</button>
-              </form>
-              <h1>Choose class</h1>
+            </form>
+            <% if(classes.length !==0){%>
+              <h1>Search class</h1>
      
                     <form class="form-control" action="/classes" >
                         <div>
+                            
                             <select name="schoolClass">
                                 <% classes.forEach((schoolClass) => { %>
-                                        <option value="<%= schoolClass.id %>"><%= schoolClass.name %> </option>
-                                    
+                                        <option value="<%= schoolClass.id %>"><%= schoolClass.name %></option>
                                 <% }); %>
                             </select>
                         </div>
-                        <button type="submit" class="btn">Pretraži</button>         
+                        <button type="submit" class="btn">Search</button>         
                     </form>
-       
     
+                    <% if(pupils.length !== 0){%>
+
               <div class="table-data">
-          <h2>List of all pupils</h2>
-         
+              <h2>List of all pupils from chosen class</h2>
               <table border="1">
                   <tr>
                     <th>S.N</th>
@@ -54,31 +55,31 @@
                   </tr>
                   
                   <%
-                  if(pupils.length!=0){
+                  if(pupils.length !== 0){
                   var i=1;
                   pupils.forEach((pupil)=>{
                   %>
                   
-                      <% if(pupil.schoolClassId === schoolClass?.id){%><%%>
-                        <tr>
-                            <td><%=i; %></td>
-                              <td><%=pupil.name %></td>
-                              <td><%=pupil.lastName %></td>
-                              <td><%=pupil.birthday %></td>
-                              <td><%=pupil.gender %></td>
-                              <td><%=pupil.father %></td>
-                              <td><%=pupil.mother %></td>
-                              <td><%=classes.id %></td>
-                              <td><a href="/users/edit/<%=pupil.id%>">Edit</a></td>
-                              <td>
-                                <form action="/pupil-delete" method="POST">
-                                    <input type="hidden" value="<%= pupil.id %>" name="pupilId">
-                                    <button class="btn" type="submit">Delete</button>
-                                </form>
-                              </td>
-                              <td><a href="/pupils/<%= pupil.id %>" class="btn">Details</a></td>
-                          </tr>
-                        <%}%>
+                      <% if(pupil.schoolClassId === schoolClass?.id){%>
+                            <tr>
+                                <td><%=i; %></td>
+                                  <td><%=pupil.name %></td>
+                                  <td><%=pupil.lastName %></td>
+                                  <td><%=pupil.birthday %></td>
+                                  <td><%=pupil.gender %></td>
+                                  <td><%=pupil.father %></td>
+                                  <td><%=pupil.mother %></td>
+                                  <td><%=classes.id %></td>
+                                  <td><a href="/users/edit/<%=pupil.id%>">Edit</a></td>
+                                  <td>
+                                    <form action="/pupil-delete" method="POST">
+                                        <input type="hidden" value="<%= pupil.id %>" name="pupilId">
+                                        <button class="btn" type="submit">Delete</button>
+                                    </form>
+                                  </td>
+                                  <td><a href="/pupils/<%= pupil.id %>" class="btn">Details</a></td>
+                              </tr>
+                            <%}%>
                     
                  
                   <%  i++; }) %>
@@ -89,6 +90,8 @@
                   <% } %>
               </table>
               </div>
+              <%}%>
+              <%}%>
           </body>
       </main>
       

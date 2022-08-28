@@ -31,9 +31,9 @@
                         <li> 
                             <input type="text" placeholder="mothers name" name="mother" value="<%= pupils.mother %>">
                         </li>
+                        <% if(classes.length !== 0){ %> 
                         <div >
-                            <label style="display: flex; border: 1px solid gray;">Choose school class</label>
-                            <% if(classes){ %> 
+                                <label style="display: flex; border: 1px solid gray; text-align: center;">Choose school class</label>
                                 <li> 
                                     <select name="schoolClass">
                                         <% classes.forEach((item) => { %>
@@ -41,8 +41,8 @@
                                         <% }); %>
                                     </select>
                                 </li>
+                            </div>
                             <% } %>
-                        </div>
                         
                     </ul>
                 </div>
@@ -79,7 +79,7 @@
                         <td><%=pupil.gender %></td>
                         <td><%=pupil.father %></td>
                         <td><%=pupil.mother %></td>
-                        <td><a href="/users/edit/<%=pupil.id%>">Edit</a></td>
+                        <td><a href="/pupils/edit/<%=pupil.id%>">Edit</a></td>
                         <td>
                           <form action="/pupil-delete" method="POST">
                               <input type="hidden" value="<%= pupil.id %>" name="pupilId">

@@ -37,6 +37,15 @@ ul li {
 .form-control div {
   padding: 1rem;
 }
+.form-control select {
+  width: 7rem;
+  height: 1.5rem;
+}
+ul div {
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  box-shadow: 1px 1px 11px -12px;
+}
 
 .form-control input:focus,
 .form-control textarea:focus {
