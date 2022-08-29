@@ -2,6 +2,7 @@ const sequelize = require('../util/database');
 const Teacher = require('../models/teacher');
 const Subject = require('../models/subject');
 const TeacherSubject = require('../models/teacher-subject');
+const SchoolClass = require('../models/school-class');
 
 exports.getIndex = (req, res, next) => {
   res.render('teachers/index', {
@@ -14,11 +15,13 @@ exports.getTeachers = async (req, res, next) => {
     const teachers = await Teacher.findAll();
     const teacherSubject = await TeacherSubject.findAll();
     const subjects = await Subject.findAll();
+    const classes = await SchoolClass.findAll();
     console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee', teacherSubject);
     await res.render('teachers/teachers', {
       teachers: teachers,
       subjects: subjects,
       teacherSubject: teacherSubject,
+      classes: classes,
       pageTitle: 'Teachers',
       path: '/teachers',
     });

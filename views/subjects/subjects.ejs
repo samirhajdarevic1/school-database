@@ -39,7 +39,7 @@
                         <th>Subjects Teachers</th>
                         <th>Edit</th>
                         <th>Delete</th>
-                        <th>Details</th>
+                        <th>Add teacher</th>
                     </tr>
                     
                     <%
@@ -60,13 +60,13 @@
                                   <%})%>
                           <%})%>
                         </td>
-                        <td><a href="/users/edit/<%=subject.id%>">Edit</a></td>
+                        <td><a href="/subject/edit/<%=subject.id%>">Edit</a></td>
                         <td> 
                           <form action="/subject-delete" method="POST">
                               <input type="hidden" value="<%= subject.id %>" name="subjectId">
                               <button class="btn" type="submit">Delete</button>
                           </form></td>
-                        <td><a href="/subjects/<%= subject.id %>" class="btn">Details</a></td>
+                        <td><a href="/teachers" class="btn">Add new teacher</a></td>
                     </tr>
                     <%  i++; }) %>
                     <% } else{ %>

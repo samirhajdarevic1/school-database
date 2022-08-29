@@ -1,6 +1,7 @@
 const sequelize = require('../util/database');
 const Pupil = require('../models/pupil');
 const SchoolClass = require('../models/school-class');
+const Teacher = require('../models/teacher');
 
 exports.getIndex = (req, res, next) => {
   res.render('pupils/index', {
@@ -14,10 +15,12 @@ exports.getClasses = async (req, res, next) => {
     const schoolClass = await SchoolClass.findByPk(classId);
     const pupils = await Pupil.findAll();
     const classes = await SchoolClass.findAll();
+    const teachers = await Teacher.findAll();
     const response = await res.render('classes/classes', {
       schoolClass: schoolClass,
       pupils: pupils,
       classes: classes,
+      teachers: teachers,
       pageTitle: 'Classes',
       path: '/classes',
     });
@@ -28,9 +31,11 @@ exports.getClasses = async (req, res, next) => {
 
 exports.postAddClass = async (req, res, next) => {
   const name = req.body.name;
+  const teacherId = req.body.teacher;
   try {
     await SchoolClass.create({
       name: name,
+      teacherId: teacherId,
     });
     return res.redirect('classes');
   } catch (err) {

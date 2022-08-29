@@ -2,12 +2,12 @@
     <link rel="stylesheet" href="/css/product.css">
     <link rel="stylesheet" href="/css/forms.css">
 </head>
+<head>
+    <title>Enter the teacher</title>
+  </head>
 
 <body>
     <%- include('../includes/navigation.ejs') %>
-    <head>
-        <title>Enter the teacher</title>
-      </head>
       <main class="centered">
         <body>
             <form class="form-control" action="/teacher-subject" method="POST">
@@ -53,6 +53,7 @@
                                 <th>Birthday</th>
                                 <th>Gender</th>
                                 <th>Subject</th>
+                                <th>Headrom teacher of</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
                                 <th>Details</th>
@@ -80,6 +81,14 @@
                                           <%})%>
                                   <%})%>
               
+                                </td>
+                                <td>                                 
+                                    <% classes.forEach((schoolClass) => { %>
+                                        <% if(teacher.id === schoolClass.teacherId){%>
+                                            <p><%= schoolClass.name %></p><%}%>
+                                    
+                                    <% }); %>
+                                  
                                 </td>
                                 <td><a href="/teachers/edit/<%=teacher.id%>">Edit</a></td>
                                 <td> 

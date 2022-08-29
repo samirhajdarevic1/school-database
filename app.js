@@ -57,6 +57,12 @@ Pupil.belongsTo(SchoolClass);
 Subject.hasMany(Grade);
 Grade.belongsTo(Subject);
 
+Teacher.hasOne(SchoolClass, {
+  foreignKey: {
+    nullable: true,
+  },
+});
+
 sequelize
   .sync({ force: false })
   .then((rrr) => {

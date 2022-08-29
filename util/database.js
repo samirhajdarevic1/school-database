@@ -10,7 +10,7 @@ const pool = mysql.createPool({
 module.exports = pool.promise(); */
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('school-database', 'root', 'nssglobus8', {
+const sequelize = new Sequelize('school-database', 'root', 'laptop123', {
   dialect: 'mysql',
   host: 'localhost',
 });
