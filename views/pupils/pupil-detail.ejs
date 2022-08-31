@@ -26,8 +26,8 @@
                     <td><%=pupil.gender %></td>
                     <td><%=pupil.father %></td>
                     <td><%=pupil.mother %></td>
-                    <td><%=classes.name.toUpperCase() %></td>
-                    <td><a href="/users/edit/<%=pupil.id%>">Edit</a></td>
+                        <td><%=schoolClass.name.toUpperCase()%></td>
+                    <td><a class="btn" href="/pupils/edit/<%=pupil.id%>">Edit</a></td>
                     <td>
                       <form action="/pupil-delete" method="POST">
                           <input type="hidden" value="<%= pupil.id %>" name="pupilId">
@@ -99,7 +99,6 @@
                           <input type="hidden" value="<%= subject.id %>" name="subjectId">
                           <button class="btn" type="submit">Delete</button>
                       </form></td>
-                   <!--  <td><a href="/subjects/<%= subject.id %>" class="btn">Details</a></td> -->
                 </tr>
                 <%  i++; }) %>
                 <% } else{ %>

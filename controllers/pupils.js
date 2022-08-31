@@ -47,12 +47,15 @@ exports.getPupil = async (req, res, next) => {
   const pupilId = req.params.pupilId;
   try {
     const pupil = await Pupil.findByPk(pupilId);
-    const classes = await SchoolClass.findByPk(pupil.schoolClassId);
+    let schoolClass = await SchoolClass.findByPk(pupil.schoolClassId);
+    if (!schoolClass) {
+      schoolClass = { name: 'Not added school class' };
+    }
     const subjects = await Subject.findAll();
     const grades = await Grade.findAll();
     const response = await res.render('pupils/pupil-detail', {
       pupil: pupil,
-      classes: classes,
+      schoolClass: schoolClass,
       subjects: subjects,
       grades: grades,
       pageTitle: pupil.name,
@@ -70,6 +73,48 @@ exports.postDeletePupil = async (req, res, next) => {
     await pupil.destroy();
     console.log('Pupil destroyed');
     await res.redirect('pupils');
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+exports.getEditPupil = async (req, res, next) => {
+  const pupilId = req.params.pupilId;
+  try {
+    const classes = await SchoolClass.findAll();
+    const pupil = await Pupil.findByPk(pupilId);
+    await res.render('pupils/edit-pupil', {
+      pageTitle: 'Edit Pupil',
+      path: '/pupils/edit-pupil',
+      pupil: pupil,
+      classes: classes,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+exports.postEditPupil = async (req, res, next) => {
+  const pupilId = req.body.pupilId;
+  const updatedName = req.body.name;
+  const updatedLastName = req.body.lastName;
+  const updatedBirthday = req.body.birthday;
+  const updatedGender = req.body.gender;
+  const updatedFather = req.body.father;
+  const updatedMother = req.body.mother;
+  const updatedClassId = req.body.schoolClass;
+  console.log(updatedClassId);
+  try {
+    const pupil = await Pupil.findByPk(pupilId);
+    pupil.name = updatedName;
+    pupil.lastName = updatedLastName;
+    pupil.birthday = updatedBirthday;
+    pupil.gender = updatedGender;
+    pupil.father = updatedFather;
+    pupil.mother = updatedMother;
+    pupil.schoolClassId = updatedClassId;
+    await pupil.save();
+    await res.redirect('/pupils/' + pupilId.toString());
   } catch (err) {
     console.log(err);
   }

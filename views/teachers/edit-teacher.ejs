@@ -1,0 +1,36 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+
+    <main class="centered">
+        <form class="form-control" action="/teachers/edit-teacher" method="POST">
+            <ul>
+                <li >
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" value="<%= teacher.name %>">
+                </li>
+                <li >
+                    <label for="lastName">Last name</label>
+                    <input type="text" name="lastName" id="lastName" value="<%= teacher.lastName %>">
+                </li>
+                <li >
+                    <label for="birthday">Birthday</label>
+                    <input type="date" name="birthday" id="birthday" value="<%= teacher.birthday %>">
+                </li>
+                <li >
+                    <label for="gender">Gender</label>
+                    <input type="text" name="gender" id="gender" value="<%= teacher.gender %>">
+                </li>
+   
+                    <input type="hidden" value="<%= teacher.id %>" name="teacherId">
+            </ul>
+           
+
+            <button class="btn" type="submit">Update teacher</button>
+        </form>
+    </main>
+<%- include('../includes/end.ejs') %>

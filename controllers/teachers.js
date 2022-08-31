@@ -97,3 +97,36 @@ exports.postDeleteTeacher = async (req, res, next) => {
     console.log(err);
   }
 };
+
+exports.getEditTeacher = async (req, res, next) => {
+  const teacherId = req.params.teacherId;
+  try {
+    const teacher = await Teacher.findByPk(teacherId);
+    await res.render('teachers/edit-teacher', {
+      pageTitle: 'Edit Teacher',
+      path: '/teachers/edit-teacher',
+      teacher: teacher,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+exports.postEditTeacher = async (req, res, next) => {
+  const teacherId = req.body.teacherId;
+  const updatedName = req.body.name;
+  const updatedLastName = req.body.lastName;
+  const updatedBirthday = req.body.birthday;
+  const updatedGender = req.body.gender;
+  try {
+    const teacher = await Teacher.findByPk(teacherId);
+    teacher.name = updatedName;
+    teacher.lastName = updatedLastName;
+    teacher.birthday = updatedBirthday;
+    teacher.gender = updatedGender;
+    await teacher.save();
+    await res.redirect('/teachers/');
+  } catch (err) {
+    console.log(err);
+  }
+};

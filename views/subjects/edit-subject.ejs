@@ -1,0 +1,23 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+
+    <main class="centered">
+        <form class="form-control" action="/subjects/edit-subject" method="POST">
+            <ul>
+                <li >
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" value="<%= subject.name %>">
+                </li> 
+                    <input type="hidden" value="<%= subject.id %>" name="subjectId">
+            </ul>
+           
+
+            <button class="btn" type="submit">Update subject</button>
+        </form>
+    </main>
+<%- include('../includes/end.ejs') %>

@@ -1,0 +1,55 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+
+    <main class="centered">
+        <form class="form-control" action="/pupils/edit-pupil" method="POST">
+            <ul>
+                <li >
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" value="<%= pupil.name %>">
+                </li>
+                <li >
+                    <label for="lastName">Last name</label>
+                    <input type="text" name="lastName" id="lastName" value="<%= pupil.lastName %>">
+                </li>
+                <li >
+                    <label for="birthday">Birthday</label>
+                    <input type="date" name="birthday" id="birthday" value="<%= pupil.birthday %>">
+                </li>
+                <li >
+                    <label for="gender">Gender</label>
+                    <input type="text" name="gender" id="gender" value="<%= pupil.gender %>">
+                </li>  
+                <li >
+                    <label for="father">Fathers name</label>
+                    <input type="text" name="father" id="father" value="<%= pupil.father %>">
+                </li>
+                <li >
+                    <label for="mother">Mothers name</label>
+                    <input type="text" name="mother" id="mother" value="<%= pupil.mother %>">
+                </li>
+                <% if(classes.length !== 0){ %> 
+                    <div >
+                            <label style="display: flex; border: 1px solid gray; text-align: center;">Choose school class</label>
+                            <li> 
+                                <select name="schoolClass">
+                                    <% classes.forEach((item) => { %>
+                                        <option value="<%= item.id %>"><%= item.name %></option>
+                                    <% }); %>
+                                </select>
+                            </li>
+                        </div>
+                        <% } %>         
+                    <input type="hidden" value="<%= pupil.id %>" name="pupilId">
+            </ul>
+           
+
+            <button class="btn" type="submit">Update pupil</button>
+        </form>
+    </main>
+<%- include('../includes/end.ejs') %>

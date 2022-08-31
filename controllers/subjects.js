@@ -66,3 +66,31 @@ exports.postDeleteSubject = (req, res, next) => {
     })
     .catch((err) => console.log(err));
 };
+
+exports.getEditSubject = async (req, res, next) => {
+  const subjectId = req.params.subjectId;
+  try {
+    const subject = await Subject.findByPk(subjectId);
+    await res.render('subjects/edit-subject', {
+      pageTitle: 'Edit Subject',
+      path: '/subjects/edit-subject',
+      subject: subject,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+exports.postEditSubject = async (req, res, next) => {
+  const subjectId = req.body.subjectId;
+  const updatedName = req.body.name;
+  console.log(updatedName);
+  try {
+    const subject = await Subject.findByPk(subjectId);
+    subject.name = updatedName;
+    await subject.save();
+    await res.redirect('/subjects');
+  } catch (err) {
+    console.log(err);
+  }
+};

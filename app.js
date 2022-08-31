@@ -65,7 +65,7 @@ Teacher.hasOne(SchoolClass, {
 
 sequelize
   .sync({ force: false })
-  .then((rrr) => {
+  .then(() => {
     app.listen(3000);
   })
   .catch((err) => {

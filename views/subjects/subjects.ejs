@@ -16,6 +16,8 @@
                         <li>
                             <input type="text" placeholder="subject" name="name" value="<%= subjects.name %>">
                         </li>
+
+                        <% if(subjects.length !== 0){ %> 
                         <div>
                             <label style="display: flex; border: 1px solid gray; text-align: center;">Choose teacher</label>
                             <li> 
@@ -26,6 +28,7 @@
                                 </select>
                             </li>      
                         </div>   
+                        <% } %>
                     </ul>
                 </div>
                 <button class="btn">Add </button>
@@ -60,7 +63,7 @@
                                   <%})%>
                           <%})%>
                         </td>
-                        <td><a href="/subject/edit/<%=subject.id%>">Edit</a></td>
+                        <td><a class="btn" href="/subjects/edit/<%=subject.id%>">Edit</a></td>
                         <td> 
                           <form action="/subject-delete" method="POST">
                               <input type="hidden" value="<%= subject.id %>" name="subjectId">

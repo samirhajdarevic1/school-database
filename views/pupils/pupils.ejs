@@ -42,7 +42,7 @@
                                     </select>
                                 </li>
                             </div>
-                            <% } %>
+                            <% } else {%><label style="display: flex;color: red; border: 1px solid gray; text-align: center;">Please add school class first!</label><%} %>
                         
                     </ul>
                 </div>
@@ -61,7 +61,6 @@
                         <th>Gender</th>
                         <th>Fathers Name</th>
                         <th>Mothers Name</th>
-                        <th>Edit</th>
                         <th>Delete</th>
                         <th>Details</th>
                     </tr>
@@ -79,7 +78,6 @@
                         <td><%=pupil.gender %></td>
                         <td><%=pupil.father %></td>
                         <td><%=pupil.mother %></td>
-                        <td><a href="/pupils/edit/<%=pupil.id%>">Edit</a></td>
                         <td>
                           <form action="/pupil-delete" method="POST">
                               <input type="hidden" value="<%= pupil.id %>" name="pupilId">
